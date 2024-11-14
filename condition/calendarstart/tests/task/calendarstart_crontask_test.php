@@ -38,9 +38,6 @@ use local_notificationsagent\notificationsagent;
 use local_notificationsagent\rule;
 use notificationscondition_calendarstart\calendarstart;
 
-defined('MOODLE_INTERNAL') || die();
-require_once(__DIR__ . '/../../../../../../lib/cronlib.php');
-
 /**
  * Test for calendarstart crontask
  *
@@ -134,7 +131,7 @@ class calendarstart_crontask_test extends \advanced_testcase {
     public function test_execute($date, $radio, $user) {
         global $DB, $USER;
         $pluginname = calendarstart::NAME;
-        \uopz_set_return('time', self::CM_DATESTART);
+        uopz_set_return('time', self::CM_DATESTART);
         $quizgen = self::getDataGenerator()->get_plugin_generator('mod_quiz');
         $cmtestacct = $quizgen->create_instance([
             'course' => self::$course->id,

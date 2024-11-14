@@ -33,8 +33,8 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-global $CFG;
-require_once($CFG->dirroot . '/lib/externallib.php');
+//global $CFG;
+//require_once($CFG->dirroot . '/lib/externallib.php');
 
 use core\event\config_log_created;
 use core\event\course_deleted;

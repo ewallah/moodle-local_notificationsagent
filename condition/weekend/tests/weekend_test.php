@@ -216,7 +216,7 @@ class weekend_test extends \advanced_testcase {
      * @return void
      */
     public function test_estimatenexttime($timeaccess, $expected, $complementary) {
-        \uopz_set_return('time', $timeaccess);
+        uopz_set_return('time', $timeaccess);
         // Saturday, Sunday configuration.
         self::$context->set_complementary($complementary);
         set_config('calendar_weekend', 65);

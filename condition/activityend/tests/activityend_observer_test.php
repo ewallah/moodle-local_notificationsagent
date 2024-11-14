@@ -117,7 +117,7 @@ class activityend_observer_test extends \advanced_testcase {
     public function test_course_module_updated($role) {
         global $DB, $USER;
 
-        \uopz_set_return('time', self::COURSE_DATEEND - 120);
+        uopz_set_return('time', self::COURSE_DATEEND - 120);
         $quizgenerator = self::getDataGenerator()->get_plugin_generator('mod_quiz');
         $cmgen = $quizgenerator->create_instance([
                 'course' => self::$course->id,

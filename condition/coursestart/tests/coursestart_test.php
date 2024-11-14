@@ -229,7 +229,7 @@ class coursestart_test extends \advanced_testcase {
      * @dataProvider dataprovider
      */
     public function test_estimatenexttime($timeaccess, $complementary, $param) {
-        \uopz_set_return('time', time());
+        uopz_set_return('time', time());
 
         self::$context->set_params($param);
         self::$context->set_complementary($complementary);

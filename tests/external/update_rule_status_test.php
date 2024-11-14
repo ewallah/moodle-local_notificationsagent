@@ -34,18 +34,18 @@
 
 namespace local_notificationsagent\external;
 
+use core_external\{external_api, external_value, external_warnings};
+use core_external\{external_function_parameters, external_single_structure};
 use local_notificationsagent\rule;
-use external_api;
+use moodle_exception;
 use local_notificationsagent\external\update_rule_status;
-
-defined('MOODLE_INTERNAL') || die();
-global $CFG;
-require_once("{$CFG->libdir}/externallib.php");
 
 /**
  * Testing external update rule status
  *
  * @group notificationsagent
+ * @runInSeparateProcess
+ * @runTestsInSeparateProcesses
  */
 class update_rule_status_test extends \advanced_testcase {
     /**

@@ -211,7 +211,7 @@ class calendarstart_observer_test extends \advanced_testcase {
 
     public function test_calendar_event_deleted() {
         global $DB;
-        \uopz_set_return('time', self::COURSE_DATESTART);
+        uopz_set_return('time', self::COURSE_DATESTART);
 
         self::setUser(2);// Admin.
 

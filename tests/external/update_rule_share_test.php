@@ -35,17 +35,15 @@
 namespace local_notificationsagent\external;
 
 use local_notificationsagent\rule;
-use external_api;
+use core_external\external_api;
 use local_notificationsagent\external\update_rule_share;
-
-defined('MOODLE_INTERNAL') || die();
-global $CFG;
-require_once("{$CFG->libdir}/externallib.php");
 
 /**
  * Testing external update rule share
  *
  * @group notificationsagent
+ * @runInSeparateProcess
+ * @runTestsInSeparateProcesses
  */
 class update_rule_share_test extends \advanced_testcase {
     /**

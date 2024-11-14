@@ -111,7 +111,7 @@ class activitysinceend_observer_test extends \advanced_testcase {
 
     public function test_course_module_completion_updated($time, $data) {
         global $DB, $USER;
-        \uopz_set_return('time', $time);
+        uopz_set_return('time', $time);
         $pluginname = activitysinceend::NAME;
 
         $modinstance = self::getDataGenerator()->create_module('quiz', [

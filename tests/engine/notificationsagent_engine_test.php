@@ -137,7 +137,7 @@ class notificationsagent_engine_test extends \advanced_testcase {
      * @param bool $expected
      *
      * @return void
-     * @covers       ::notificationsagent_engine_evaluate_rule
+     * @covers \local_notificationsagent\engine\notificationsagent_engine
      */
     public function test_notificationsagent_engine_evaluate_rule(
         int $date,

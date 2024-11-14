@@ -38,9 +38,6 @@ use local_notificationsagent\notificationsagent;
 use local_notificationsagent\rule;
 use notificationscondition_weekdays\weekdays;
 
-defined('MOODLE_INTERNAL') || die();
-require_once(__DIR__ . '/../../../../../../lib/cronlib.php');
-
 /**
  * Test for weekdays cron task
  *
@@ -112,7 +109,7 @@ class weekdays_crontask_test extends \advanced_testcase {
     public function test_execute($date, $user, $parameters) {
         global $DB, $USER;
         $pluginname = weekdays::NAME;
-        \uopz_set_return('time', $date);
+        uopz_set_return('time', $date);
         $dataform = new \StdClass();
         $dataform->title = "Rule Test";
         $dataform->type = 1;

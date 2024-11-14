@@ -231,7 +231,7 @@ class sessionend_test extends \advanced_testcase {
      * @dataProvider dataestimate
      */
     public function test_estimatenexttime($timeaccess, $userlastaccess, $complementary, $params) {
-        \uopz_set_return('time', $timeaccess);
+        uopz_set_return('time', $timeaccess);
         self::$context->set_params($params);
         self::$context->set_userid(self::$user->id);
         self::$context->set_courseid(self::$coursetest->id);

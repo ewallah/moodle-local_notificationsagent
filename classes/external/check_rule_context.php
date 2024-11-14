@@ -35,21 +35,24 @@
 
 namespace local_notificationsagent\external;
 
+use core_external\{external_api, external_value, external_warnings};
+use core_external\{external_function_parameters, external_single_structure};
 use local_notificationsagent\rule;
+use moodle_exception;
 
 /**
  * Rule external API for checking if the rule has a context other than the default one.
  *
  */
-class check_rule_context extends \external_api {
+class check_rule_context extends external_api {
     /**
      * Define parameters for external function.
      *
      * @return \external_function_parameters
      */
-    public static function execute_parameters(): \external_function_parameters {
-        return new \external_function_parameters([
-                'ruleid' => new \external_value(PARAM_INT, 'The rule ID', VALUE_REQUIRED),
+    public static function execute_parameters(): external_function_parameters {
+        return new external_function_parameters([
+                'ruleid' => new external_value(PARAM_INT, 'The rule ID', VALUE_REQUIRED),
         ]);
     }
 
@@ -73,13 +76,13 @@ class check_rule_context extends \external_api {
         $instance = rule::create_instance($ruleid);
         if (empty($instance)) {
             try {
-                throw new \moodle_exception(
+                throw new moodle_exception(
                     'nosuchinstance',
                     '',
                     '',
                     get_capability_string('local/notificationsagent:nosuchinstance')
                 );
-            } catch (\moodle_exception $e) {
+            } catch (moodle_exception $e) {
                 $result['warnings'][] = [
                         'item' => 'local_notificationsagent',
                         'warningcode' => $e->errorcode,
@@ -94,14 +97,14 @@ class check_rule_context extends \external_api {
             if ($context && has_capability('local/notificationsagent:checkrulecontext', $context)) {
                 $result['hascontext'] = $instance->has_context();
             } else {
-                throw new \moodle_exception(
+                throw new moodle_exception(
                     'nopermissions',
                     '',
                     '',
                     get_capability_string('local/notificationsagent:checkrulecontext')
                 );
             }
-        } catch (\moodle_exception $e) {
+        } catch (moodle_exception $e) {
             $result['warnings'][] = [
                     'item' => 'local_notificationsagent',
                     'itemid' => $instance->get_id(),
@@ -118,11 +121,11 @@ class check_rule_context extends \external_api {
      *
      * @return external_function_parameters
      */
-    public static function execute_returns(): \external_function_parameters {
-        return new \external_function_parameters(
+    public static function execute_returns(): external_function_parameters {
+        return new external_function_parameters(
             [
-                        'warnings' => new \external_warnings(),
-                        'hascontext' => new \external_value(PARAM_BOOL, 'has context', VALUE_REQUIRED),
+                        'warnings' => new external_warnings(),
+                        'hascontext' => new external_value(PARAM_BOOL, 'has context', VALUE_REQUIRED),
                 ]
         );
     }

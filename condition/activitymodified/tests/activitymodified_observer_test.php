@@ -98,7 +98,7 @@ class activitymodified_observer_test extends \advanced_testcase {
         global $DB, $USER;
 
         if (!is_null($fileuploadtime)) {
-            \uopz_set_return('time', $fileuploadtime);
+            uopz_set_return('time', $fileuploadtime);
         }
 
         $pluginname = activitymodified::NAME;

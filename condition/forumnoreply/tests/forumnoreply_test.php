@@ -125,7 +125,7 @@ class forumnoreply_test extends \advanced_testcase {
      * @dataProvider dataprovider
      */
     public function test_evaluate($timeaccess, $param, $expected, $complementary) {
-        \uopz_set_return('time', $timeaccess);
+        uopz_set_return('time', $timeaccess);
         self::$context->set_params($param);
         self::$context->set_timeaccess($timeaccess);
         self::$context->set_complementary($complementary);

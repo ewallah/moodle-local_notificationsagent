@@ -152,7 +152,7 @@ class itemgraded_test extends \advanced_testcase {
         }
 
         // Create quiz object.
-        $quizobj = \quiz::create($quiz->id, self::$user->id);
+        $quizobj = \mod_quiz\quiz_settings::create($quiz->id, self::$user->id);
 
         $quba = \question_engine::make_questions_usage_by_activity('mod_quiz', $quizobj->get_context());
         $quba->set_preferred_behaviour($quizobj->get_quiz()->preferredbehaviour);
@@ -166,7 +166,7 @@ class itemgraded_test extends \advanced_testcase {
         // Save question started.
         quiz_attempt_save_started($quizobj, $quba, $attempt);
 
-        $attemptobj = \quiz_attempt::create($attempt->id);
+        $attemptobj = \mod_quiz\quiz_attempt::create($attempt->id);
         $params = json_decode($param);
         $params->cmid = $cm->id;
         self::$context->set_params(json_encode($params));
@@ -283,7 +283,7 @@ class itemgraded_test extends \advanced_testcase {
         }
 
         // Create quiz object.
-        $quizobj = \quiz::create($quiz->id, self::$user->id);
+        $quizobj = \mod_quiz\quiz_settings::create($quiz->id, self::$user->id);
 
         $quba = \question_engine::make_questions_usage_by_activity('mod_quiz', $quizobj->get_context());
         $quba->set_preferred_behaviour($quizobj->get_quiz()->preferredbehaviour);
@@ -297,7 +297,7 @@ class itemgraded_test extends \advanced_testcase {
         // Save question started.
         quiz_attempt_save_started($quizobj, $quba, $attempt);
 
-        $attemptobj = \quiz_attempt::create($attempt->id);
+        $attemptobj = \mod_quiz\quiz_attempt::create($attempt->id);
         $params = json_decode($param);
         $params->cmid = $cm->id;
         self::$context->set_params(json_encode($params));

@@ -205,7 +205,7 @@ class ac_test extends \advanced_testcase {
      * @throws \coding_exception
      */
     public function test_estimatenexttime($conditionjson, $expected) {
-        \uopz_set_return('time', 1704099600);
+        uopz_set_return('time', 1704099600);
 
         self::$context->set_params($conditionjson);
 

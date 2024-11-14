@@ -259,7 +259,7 @@ class calendareventto_test extends \advanced_testcase {
      * @dataProvider dataestimate
      */
     public function test_estimatenexttime($timeaccess, $usecache, $param, $complementary, $expected) {
-        \uopz_set_return('time', $timeaccess);
+        uopz_set_return('time', $timeaccess);
         $auxarray = json_decode($param, true);
         $auxarray['cmid'] = self::$caledarevent->id;
         $param = json_encode($auxarray);

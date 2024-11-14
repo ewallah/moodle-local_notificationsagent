@@ -146,7 +146,7 @@ class activitymodified_test extends \advanced_testcase {
         self::$context->set_complementary($complementary);
         self::$subplugin->set_id(self::CONDITIONID);
 
-        \uopz_set_return('time', self::$context->get_timeaccess());
+        uopz_set_return('time', self::$context->get_timeaccess());
         $activityctx = \context_module::instance(self::$activity->cmid);
 
         if ($usecache) {

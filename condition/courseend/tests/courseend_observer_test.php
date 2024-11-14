@@ -106,7 +106,7 @@ class courseend_observer_test extends \advanced_testcase {
 
     public function test_course_updated($time, $user) {
         global $DB, $USER;
-        \uopz_set_return('time', self::COURSE_DATEEND);
+        uopz_set_return('time', self::COURSE_DATEEND);
         $dataform = new \StdClass();
         $dataform->title = "Rule Test";
         $dataform->type = 1;

@@ -35,17 +35,15 @@
 namespace local_notificationsagent\external;
 
 use local_notificationsagent\rule;
-use external_api;
+use core_external\external_api;
 use local_notificationsagent\external\delete_rule;
-
-defined('MOODLE_INTERNAL') || die();
-global $CFG;
-require_once("{$CFG->libdir}/externallib.php");
 
 /**
  * Testing external delete rule
  *
  * @group notificationsagent
+ * @runInSeparateProcess
+ * @runTestsInSeparateProcesses
  */
 class delete_rule_test extends \advanced_testcase {
     /**

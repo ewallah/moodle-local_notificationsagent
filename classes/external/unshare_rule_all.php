@@ -35,21 +35,24 @@
 
 namespace local_notificationsagent\external;
 
+use core_external\{external_api, external_value, external_warnings};
+use core_external\{external_function_parameters, external_single_structure};
 use local_notificationsagent\rule;
+use moodle_exception;
 
 /**
  * Rule external API for rejecting the rule's sharing.
  *
  */
-class unshare_rule_all extends \external_api {
+class unshare_rule_all extends external_api {
     /**
      * Define parameters for external function.
      *
      * @return \external_function_parameters
      */
-    public static function execute_parameters(): \external_function_parameters {
-        return new \external_function_parameters([
-                'ruleid' => new \external_value(PARAM_INT, 'The rule ID', VALUE_REQUIRED),
+    public static function execute_parameters(): external_function_parameters {
+        return new external_function_parameters([
+                'ruleid' => new external_value(PARAM_INT, 'The rule ID', VALUE_REQUIRED),
         ]);
     }
 
@@ -73,13 +76,13 @@ class unshare_rule_all extends \external_api {
         $instance = rule::create_instance($ruleid);
         if (empty($instance)) {
             try {
-                throw new \moodle_exception(
+                throw new moodle_exception(
                     'nosuchinstance',
                     '',
                     '',
                     get_capability_string('local/notificationsagent:nosuchinstance')
                 );
-            } catch (\moodle_exception $e) {
+            } catch (moodle_exception $e) {
                 $result['warnings'][] = [
                         'item' => 'local_notificationsagent',
                         'warningcode' => $e->errorcode,
@@ -96,7 +99,7 @@ class unshare_rule_all extends \external_api {
                 if ($instance->get_template()) {
                     $instance->reject_share_rule($instance->get_id());
                 } else {
-                    throw new \moodle_exception(
+                    throw new moodle_exception(
                         'isnotrule',
                         '',
                         '',
@@ -105,14 +108,14 @@ class unshare_rule_all extends \external_api {
                     );
                 }
             } else {
-                throw new \moodle_exception(
+                throw new moodle_exception(
                     'nopermissions',
                     '',
                     '',
                     get_capability_string('local/notificationsagent:unshareruleall')
                 );
             }
-        } catch (\moodle_exception $e) {
+        } catch (moodle_exception $e) {
             $result['warnings'][] = [
                     'item' => 'local_notificationsagent',
                     'itemid' => $instance->get_id(),
@@ -129,10 +132,10 @@ class unshare_rule_all extends \external_api {
      *
      * @return external_single_structure
      */
-    public static function execute_returns(): \external_single_structure {
-        return new \external_single_structure(
+    public static function execute_returns(): external_single_structure {
+        return new external_single_structure(
             [
-                        'warnings' => new \external_warnings(),
+                        'warnings' => new external_warnings(),
                 ]
         );
     }

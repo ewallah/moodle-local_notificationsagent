@@ -249,7 +249,7 @@ class activityend_test extends \advanced_testcase {
      * @dataProvider dataprovider
      */
     public function test_estimatenexttime($timeaccess, $usecache, $param, $complementary, $expected) {
-        \uopz_set_return('time', $timeaccess);
+        uopz_set_return('time', $timeaccess);
         self::$context->set_timeaccess($timeaccess);
         self::$context->set_complementary($complementary);
         self::$subplugin->set_id(self::CONDITIONID);

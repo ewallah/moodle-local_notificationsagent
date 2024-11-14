@@ -229,7 +229,7 @@ class usergroupadd_test extends \advanced_testcase {
      * @return void
      */
     public function test_estimatenexttime($timeaccess, $expected, $complementary, $addingroup) {
-        \uopz_set_return('time', $timeaccess);
+        uopz_set_return('time', $timeaccess);
         // Saturday, Sunday configuration.
         self::$context->set_complementary($complementary);
         set_config('calendar_usergroupadd', 65);

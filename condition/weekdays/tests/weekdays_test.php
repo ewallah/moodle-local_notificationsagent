@@ -200,7 +200,7 @@ class weekdays_test extends \advanced_testcase {
      * @return void
      */
     public function test_estimatenexttime($timeaccess, $expected, $param, $complementary) {
-        \uopz_set_return('time', $timeaccess);
+        uopz_set_return('time', $timeaccess);
         date_default_timezone_set('Europe/Madrid');
         self::$context->set_complementary($complementary);
         self::$context->set_timeaccess($timeaccess);

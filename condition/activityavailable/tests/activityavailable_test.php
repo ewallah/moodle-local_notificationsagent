@@ -221,7 +221,7 @@ class activityavailable_test extends \advanced_testcase {
      * @throws \coding_exception
      */
     public function test_estimatenexttime($conditionjson, $complementary, $expected) {
-        \uopz_set_return('time', 1704099600);
+        uopz_set_return('time', 1704099600);
         $quizgen = self::getDataGenerator()->get_plugin_generator('mod_quiz');
         $cmtestent = $quizgen->create_instance([
                 'name' => 'Quiz unittest',

@@ -38,8 +38,6 @@ use local_notificationsagent\notificationsagent;
 use local_notificationsagent\rule;
 use notificationscondition_ondates\ondates;
 
-defined('MOODLE_INTERNAL') || die();
-require_once(__DIR__ . '/../../../../../../lib/cronlib.php');
 
 /**
  * Ondates test cron task tests
@@ -110,7 +108,7 @@ class ondates_crontask_test extends \advanced_testcase {
     public function test_execute($date, $user) {
         global $DB, $USER;
         $pluginname = ondates::NAME;
-        \uopz_set_return('time', $date);
+        uopz_set_return('time', $date);
         $dataform = new \StdClass();
         $dataform->title = "Rule Test";
         $dataform->type = 1;

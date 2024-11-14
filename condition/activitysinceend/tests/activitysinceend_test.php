@@ -261,7 +261,7 @@ class activitysinceend_test extends \advanced_testcase {
      */
     public function test_estimatenexttime($timeaccess, $param, $complementary, $completion) {
         global $DB;
-        \uopz_set_return('time', 1704099600);
+        uopz_set_return('time', 1704099600);
         // Test estimate next time.
         self::$context->set_timeaccess($timeaccess);
         self::$context->set_complementary($complementary);
@@ -473,7 +473,7 @@ class activitysinceend_test extends \advanced_testcase {
      * @covers \notificationscondition_activitysinceend\activitysinceend::get_timecompletion
      */
     public function test_get_timecompletion() {
-        \uopz_set_return('time', time());
+        uopz_set_return('time', time());
         $modinstance = self::getDataGenerator()->create_module('quiz', [
                 'course' => self::$coursetest,
                 'completion' => COMPLETION_TRACKING_AUTOMATIC,

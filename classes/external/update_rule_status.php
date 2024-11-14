@@ -35,11 +35,10 @@
 
 namespace local_notificationsagent\external;
 
+use core_external\{external_api, external_value, external_warnings};
+use core_external\{external_function_parameters, external_single_structure};
 use local_notificationsagent\rule;
-
-defined('MOODLE_INTERNAL') || die();
-global $CFG;
-require_once($CFG->dirroot . '/lib/externallib.php');
+use moodle_exception;
 
 /**
  * Rule external API for updating the rule's status.
@@ -48,16 +47,16 @@ require_once($CFG->dirroot . '/lib/externallib.php');
  * @copyright  2023 ISYC <soporte@isyc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class update_rule_status extends \external_api {
+class update_rule_status extends external_api {
     /**
      * Define parameters for external function.
      *
      * @return \external_function_parameters
      */
-    public static function execute_parameters(): \external_function_parameters {
-        return new \external_function_parameters([
-                'ruleid' => new \external_value(PARAM_INT, 'The rule ID', VALUE_REQUIRED),
-                'status' => new \external_value(PARAM_BOOL, 'Whether to pause, or resume a rule', VALUE_REQUIRED),
+    public static function execute_parameters(): external_function_parameters {
+        return new external_function_parameters([
+                'ruleid' => new external_value(PARAM_INT, 'The rule ID', VALUE_REQUIRED),
+                'status' => new external_value(PARAM_BOOL, 'Whether to pause, or resume a rule', VALUE_REQUIRED),
         ]);
     }
 
@@ -86,13 +85,13 @@ class update_rule_status extends \external_api {
         $instance = rule::create_instance($ruleid);
         if (empty($instance)) {
             try {
-                throw new \moodle_exception(
+                throw new moodle_exception(
                     'nosuchinstance',
                     '',
                     '',
                     get_capability_string('local/notificationsagent:nosuchinstance')
                 );
-            } catch (\moodle_exception $e) {
+            } catch (moodle_exception $e) {
                 $result['warnings'][] = [
                         'item' => 'local_notificationsagent',
                         'warningcode' => $e->errorcode,
@@ -114,14 +113,14 @@ class update_rule_status extends \external_api {
                 }
                 $DB->update_record('notificationsagent_rule', $request);
             } else {
-                throw new \moodle_exception(
+                throw new moodle_exception(
                     'nopermissions',
                     '',
                     '',
                     get_capability_string('local/notificationsagent:updaterulestatus')
                 );
             }
-        } catch (\moodle_exception $e) {
+        } catch (moodle_exception $e) {
             $result['warnings'][] = [
                     'item' => 'local_notificationsagent',
                     'itemid' => $instance->get_id(),
@@ -138,11 +137,11 @@ class update_rule_status extends \external_api {
      *
      * @return external_single_structure
      */
-    public static function execute_returns(): \external_single_structure {
-        return new \external_single_structure(
+    public static function execute_returns(): external_single_structure {
+        return new external_single_structure(
             [
-                        'warnings' => new \external_warnings(),
-                ]
+                'warnings' => new external_warnings(),
+            ]
         );
     }
 }

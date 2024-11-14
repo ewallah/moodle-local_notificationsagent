@@ -237,7 +237,7 @@ class sessionstart_test extends \advanced_testcase {
      * @dataProvider dataestimate
      */
     public function test_estimatenexttime($timeaccess, $usecache, $complementary, $param) {
-        \uopz_set_return('time', $timeaccess);
+        uopz_set_return('time', $timeaccess);
         self::$context->set_complementary($complementary);
         self::$context->set_params($param);
         self::$context->set_timeaccess(self::COURSE_DATEEND);

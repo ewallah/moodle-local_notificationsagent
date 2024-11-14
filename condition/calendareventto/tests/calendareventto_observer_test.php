@@ -128,7 +128,7 @@ class calendareventto_observer_test extends \advanced_testcase {
 
     public function test_calendar_updated($time, $user) {
         global $DB, $USER;
-        \uopz_set_return('time', self::COURSE_DATESTART);
+        uopz_set_return('time', self::COURSE_DATESTART);
         $dataform = new \StdClass();
         $dataform->title = "Rule Test";
         $dataform->type = 1;
@@ -198,7 +198,7 @@ class calendareventto_observer_test extends \advanced_testcase {
 
     public function test_calendar_event_deleted() {
         global $DB;
-        \uopz_set_return('time', self::COURSE_DATESTART);
+        uopz_set_return('time', self::COURSE_DATESTART);
 
         self::setUser(2);// Admin.
 

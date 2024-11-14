@@ -270,7 +270,7 @@ class activitystudentend_test extends \advanced_testcase {
      */
     public function test_estimatenexttime($timeaccess, $param, $complementary, $completion) {
         global $DB;
-        \uopz_set_return('time', $timeaccess);
+        uopz_set_return('time', $timeaccess);
         // Test estimate next time.
         self::$context->set_timeaccess($timeaccess);
         self::$context->set_complementary($complementary);

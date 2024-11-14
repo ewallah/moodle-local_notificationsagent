@@ -1,0 +1,90 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        moodle-branch: ['MOODLE_404_STABLE', 'MOODLE_405_STABLE']
+        php: ['8.2']
+        database: ['mysqli']
+        include:
+          - php: '8.3'
+            moodle-branch: 'main'
+            database: 'mysqli'
+
+    name: ${{ matrix.moodle-branch }}  php ${{ matrix.php }}  ${{ matrix.database }}
+
+    steps:
+      - name: checkout plugin
+        uses: actions/checkout@v4
+        with:
+          path: this-plugin
+
+      - name: setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          ini-values: max_input_vars=5000
+          extension-csv: uopz
+          pecl: true
+          coverage: pcov
+
+      - name: composer
+        run: |
+           composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci
+           echo $(cd ci/bin; pwd) >> $GITHUB_PATH
+           echo $(cd ci/vendor/bin; pwd) >> $GITHUB_PATH
+           sudo locale-gen en_AU.UTF-8
+           sudo systemctl start mysql.service
+
+      - name: install Moodle
+        run: moodle-plugin-ci install --db-user=root --db-pass=root --db-host=127.0.0.1 --plugin this-plugin
+        env:
+          DB: ${{ matrix.database }}
+          MOODLE_BRANCH: ${{ matrix.moodle-branch }}
+
+      - name: phplint
+        if: ${{ !cancelled() }}
+        run: moodle-plugin-ci --ansi phplint
+
+      - name: phpmd
+        if: ${{ !cancelled() }}
+        run: moodle-plugin-ci --ansi phpmd
+
+      - name: phpdoc
+        if: ${{ !cancelled() }}
+        run: moodle-plugin-ci --ansi phpdoc
+
+      - name: codechecker
+        continue-on-error: true
+        if: ${{ !cancelled() }}
+        run: moodle-plugin-ci --ansi codechecker
+
+      - name: validate
+        if: ${{ !cancelled() }}
+        run: moodle-plugin-ci --ansi validate
+
+      - name: savepoints
+        if: ${{ !cancelled() }}
+        run: moodle-plugin-ci --ansi savepoints
+
+      - name: grunt
+        if: ${{ !cancelled() }}
+        run: moodle-plugin-ci --ansi grunt
+
+      - name: mustache
+        if: ${{ !cancelled() }}
+        run: moodle-plugin-ci --ansi mustache
+
+      - name: phpunit
+        if: ${{ !cancelled() }}
+        run: moodle-plugin-ci --ansi phpunit --testdox --coverage-text
+
+      - name: chrome
+        if: ${{ !cancelled() }}
+        run: moodle-plugin-ci --ansi behat --profile chrome

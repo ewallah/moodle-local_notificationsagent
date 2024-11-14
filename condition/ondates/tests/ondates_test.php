@@ -235,7 +235,7 @@ class ondates_test extends \advanced_testcase {
      * @return void
      */
     public function test_estimatenexttime($timeaccess, $expected, $params, $complementary) {
-        \uopz_set_return('time', $timeaccess);
+        uopz_set_return('time', $timeaccess);
         self::$context->set_params($params);
         // Saturday, Sunday configuration.
         self::$context->set_complementary($complementary);

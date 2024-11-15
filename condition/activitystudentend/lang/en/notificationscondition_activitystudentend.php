@@ -34,12 +34,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Condition date since the student last entry in the activity ';
-$string['conditiontext'] = '[TTTT] has passed since the student last entry in the activity [AAAA].';
-$string['subtype'] = 'activitystudentend';
-$string['modname'] = 'activitystudentend';
-$string['editrule_condition_element_time'] = 'Time {$a->typeelement}:';
-$string['editrule_condition_activity'] = 'Activity {$a->typeelement}:';
 $string['activitystudentend_crontask'] = 'Activity open cron task';
-
+$string['conditiontext'] = '[TTTT] has passed since the student last entry in the activity [AAAA].';
+$string['editrule_condition_activity'] = 'Activity {$a->typeelement}:';
+$string['editrule_condition_element_time'] = 'Time {$a->typeelement}:';
+$string['modname'] = 'activitystudentend';
+$string['pluginname'] = 'Condition date since the student last entry in the activity ';
 $string['privacy:metadata'] = 'The activitystudentend plugin does not store any personal data.';
+$string['subtype'] = 'activitystudentend';
+

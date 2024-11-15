@@ -47,7 +47,7 @@ use notificationscondition_sessionstart\sessionstart;
  * @runInSeparateProcess
  * @runTestsInSeparateProcesses
  */
-class notificationsagent_observer_test extends \advanced_testcase {
+final class notificationsagent_observer_test extends \advanced_testcase {
 
     /**
      * @var \stdClass
@@ -86,7 +86,7 @@ class notificationsagent_observer_test extends \advanced_testcase {
      */
     public const CMID = 246000;
 
-    final public function setUp(): void {
+    public function setUp(): void {
         parent::setUp();
         $this->resetAfterTest();
         $rule = new \local_notificationsagent\rule();
@@ -113,7 +113,7 @@ class notificationsagent_observer_test extends \advanced_testcase {
      *
      * @return void
      */
-    public function test_course_deleted() {
+    public function test_course_deleted(): void {
         global $DB, $USER;
 
         $rule = new rule();

@@ -33,12 +33,10 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
-$string['pluginname'] = 'Notifications Agent';
-
 $string['admin_breadcrumb'] = 'Notifications Agent Admin';
 $string['course_breadcrumb'] = 'Notifications Agent';
+$string['pluginname'] = 'Notifications Agent';
+
 
 // Settings.
 $string['settings'] = 'Settings';
@@ -344,8 +342,8 @@ $string['evaluaterule_help'] =
      ([Condition 1] **AND** [Condition 2]  **AND** ... ) **AND NOT** ([Exception 1] **OR** [Exception 2] ...) -> [Action 1]->[Action 2]';
 // Placeholders.
 // 'User_FirstName', 'User_LastName', 'User_Email', 'User_Username', 'User_Address',
-//'Course_FullName', 'Course_Url', 'Course_Category_Name', 'Teacher_FirstName', 'Teacher_LastName',
-//'Teacher_Email','Teacher_Username', 'Teacher_Address', 'Current_time', self::SEPARATOR, 'Follow_Link',
+// 'Course_FullName', 'Course_Url', 'Course_Category_Name', 'Teacher_FirstName', 'Teacher_LastName',
+// 'Teacher_Email','Teacher_Username', 'Teacher_Address', 'Current_time', self::SEPARATOR, 'Follow_Link',
 $string['placeholder_User_FirstName'] = 'User first name';
 $string['placeholder_User_LastName'] = 'User last name';
 $string['placeholder_User_Email'] = 'User email';

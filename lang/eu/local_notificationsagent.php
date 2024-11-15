@@ -35,10 +35,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Jakinarazpen-agentea';
-
 $string['admin_breadcrumb'] = 'Jakinarazpen-agentea Admin';
 $string['course_breadcrumb'] = 'Jakinarazpen-agentea';
+$string['pluginname'] = 'Jakinarazpen-agentea';
+
 
 // Ezarpenak.
 $string['settings'] = 'Ezarpenak';

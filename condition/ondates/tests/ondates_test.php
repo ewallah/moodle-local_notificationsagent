@@ -47,7 +47,7 @@ use notificationscondition_ondates\ondates;
  *
  * @group notificationsagent
  */
-class ondates_test extends \advanced_testcase {
+final class ondates_test extends \advanced_testcase {
     /**
      * @var rule
      */
@@ -129,7 +129,7 @@ class ondates_test extends \advanced_testcase {
      *
      * @dataProvider dataprovider
      */
-    public function test_evaluate($timeaccess, $usecache, $complementary, $expected, $params) {
+    public function test_evaluate($timeaccess, $usecache, $complementary, $expected, $params): void {
         self::$context->set_timeaccess($timeaccess);
         self::$context->set_complementary($complementary);
         self::$context->set_params($params);
@@ -187,7 +187,7 @@ class ondates_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_ondates\ondates::get_subtype
      */
-    public function test_getsubtype() {
+    public function test_getsubtype(): void {
         $this->assertSame(self::$subtype, self::$subplugin->get_subtype());
     }
 
@@ -196,7 +196,7 @@ class ondates_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_ondates\ondates::is_generic
      */
-    public function test_isgeneric() {
+    public function test_isgeneric(): void {
         $this->assertTrue(self::$subplugin->is_generic());
     }
 
@@ -205,7 +205,7 @@ class ondates_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_ondates\ondates::get_elements
      */
-    public function test_getelements() {
+    public function test_getelements(): void {
         $this->assertSame(self::$elements, self::$subplugin->get_elements());
     }
 
@@ -214,7 +214,7 @@ class ondates_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_ondates\ondates::check_capability
      */
-    public function test_checkcapability() {
+    public function test_checkcapability(): void {
         $this->assertSame(
             has_capability('local/notificationsagent:' . self::$subtype, self::$coursecontext),
             self::$subplugin->check_capability(self::$coursecontext)
@@ -234,7 +234,7 @@ class ondates_test extends \advanced_testcase {
      *
      * @return void
      */
-    public function test_estimatenexttime($timeaccess, $expected, $params, $complementary) {
+    public function test_estimatenexttime($timeaccess, $expected, $params, $complementary): void {
         uopz_set_return('time', $timeaccess);
         self::$context->set_params($params);
         // Saturday, Sunday configuration.
@@ -277,7 +277,7 @@ class ondates_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_ondates\ondates::get_cmid
      */
-    public function test_getcmid() {
+    public function test_getcmid(): void {
         // Test estimate next time.
         $this->assertNull(self::$subplugin->get_cmid(self::$context));
     }
@@ -287,7 +287,7 @@ class ondates_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_ondates\ondates::get_title
      */
-    public function test_gettitle() {
+    public function test_gettitle(): void {
         $this->assertNotNull(self::$subplugin->get_title());
         foreach (self::$elements as $element) {
             $this->assertStringContainsString($element, self::$subplugin->get_title());
@@ -299,7 +299,7 @@ class ondates_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_ondates\ondates::get_description
      */
-    public function test_getdescription() {
+    public function test_getdescription(): void {
         $this->assertSame(
             self::$subplugin->get_description(),
             [
@@ -314,7 +314,7 @@ class ondates_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_ondates\ondates::convert_parameters
      */
-    public function test_convertparameters() {
+    public function test_convertparameters(): void {
         $id = 0;
         $starddate = 1701622222;
         $enddate = 1714894444;
@@ -338,7 +338,7 @@ class ondates_test extends \advanced_testcase {
      * @covers \notificationscondition_ondates\ondates::process_markups
      * @covers \notificationscondition_ondates\ondates::replace_first
      */
-    public function test_processmarkups() {
+    public function test_processmarkups(): void {
         $content = [];
         $params = '{"startdate":1704506700, "enddate":1714345199}';
         $paramsdecoded = json_decode($params);
@@ -368,7 +368,7 @@ class ondates_test extends \advanced_testcase {
      * @covers       \notificationscondition_ondates\ondates::is_ondates()
      * @dataProvider dataproviderwe
      */
-    final public function test_isondates(int $timeaccess, string $params, bool $expected) {
+    public function test_isondates(int $timeaccess, string $params, bool $expected): void {
         set_config('calendar_ondates', 65);
         $paramsdecoded = json_decode($params);
         $this->assertSame(
@@ -398,7 +398,7 @@ class ondates_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_ondates\ondates::get_ui
      */
-    public function test_getui() {
+    public function test_getui(): void {
         $courseid = self::$coursetest->id;
         $typeaction = "add";
         $customdata = [
@@ -431,7 +431,7 @@ class ondates_test extends \advanced_testcase {
      * @dataProvider datavalidation
      * @covers       \notificationscondition_ondates\ondates::validation
      */
-    public function test_validation($params, $expected) {
+    public function test_validation($params, $expected): void {
         self::$subplugin->set_parameters($params);
         $this->assertSame($expected, self::$subplugin->validation(self::$coursetest->id));
     }
@@ -454,7 +454,7 @@ class ondates_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_ondates\ondates::load_dataform
      */
-    public function test_loaddataform() {
+    public function test_loaddataform(): void {
         $params = '{"startdate": 1714627363, "enddate": 1799827363}';
         self::$subplugin->set_parameters($params);
         $this->assertIsArray(self::$subplugin->load_dataform());
@@ -467,7 +467,7 @@ class ondates_test extends \advanced_testcase {
      * @return void
      *
      */
-    public function test_update_after_restore() {
+    public function test_update_after_restore(): void {
         $logger = new mock_base_logger(0);
         $this->assertFalse(self::$subplugin->update_after_restore('restoreid', self::$coursecontext->id, $logger));
     }

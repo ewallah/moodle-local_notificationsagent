@@ -47,7 +47,7 @@ use local_notificationsagent\rule;
  *
  * @group notificationsagent
  */
-class itemgraded_test extends \advanced_testcase {
+final class itemgraded_test extends \advanced_testcase {
     /**
      * @var rule
      */
@@ -128,7 +128,7 @@ class itemgraded_test extends \advanced_testcase {
      *
      * @dataProvider dataprovider
      */
-    public function test_evaluate($timeaccess, $param, $complementary, $correctquestions, $expected) {
+    public function test_evaluate($timeaccess, $param, $complementary, $correctquestions, $expected): void {
         self::$context->set_timeaccess($timeaccess);
         self::$context->set_complementary($complementary);
         self::$subplugin->set_id(self::CONDITIONID);
@@ -204,7 +204,7 @@ class itemgraded_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_itemgraded\itemgraded::get_subtype
      */
-    public function test_getsubtype() {
+    public function test_getsubtype(): void {
         $this->assertSame(self::$subtype, self::$subplugin->get_subtype());
     }
 
@@ -213,7 +213,7 @@ class itemgraded_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_itemgraded\itemgraded::is_generic
      */
-    public function test_isgeneric() {
+    public function test_isgeneric(): void {
         $this->assertFalse(self::$subplugin->is_generic());
     }
 
@@ -222,7 +222,7 @@ class itemgraded_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_itemgraded\itemgraded::get_elements
      */
-    public function test_getelements() {
+    public function test_getelements(): void {
         $this->assertSame(self::$elements, self::$subplugin->get_elements());
     }
 
@@ -231,7 +231,7 @@ class itemgraded_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_itemgraded\itemgraded::check_capability
      */
-    public function test_checkcapability() {
+    public function test_checkcapability(): void {
         $this->assertSame(
             has_capability('local/notificationsagent:' . self::$subtype, self::$coursecontext),
             self::$subplugin->check_capability(self::$coursecontext)
@@ -243,7 +243,7 @@ class itemgraded_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_itemgraded\itemgraded::get_cmid
      */
-    public function test_getcmid() {
+    public function test_getcmid(): void {
         $this->assertNull(self::$subplugin->get_cmid(self::$context));
     }
 
@@ -259,7 +259,7 @@ class itemgraded_test extends \advanced_testcase {
      * @covers       \notificationscondition_itemgraded\itemgraded::estimate_next_time
      * @dataProvider dataestimate
      */
-    public function test_estimatenexttime($timeaccess, $param, $complementary, $correctquestions, $expected) {
+    public function test_estimatenexttime($timeaccess, $param, $complementary, $correctquestions, $expected): void {
         self::$context->set_timeaccess($timeaccess);
         self::$context->set_complementary($complementary);
         self::$subplugin->set_id(self::CONDITIONID);
@@ -341,7 +341,7 @@ class itemgraded_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_itemgraded\itemgraded::get_title
      */
-    public function test_gettitle() {
+    public function test_gettitle(): void {
         $this->assertNotNull(self::$subplugin->get_title());
         foreach (self::$elements as $element) {
             $this->assertStringContainsString($element, self::$subplugin->get_title());
@@ -353,7 +353,7 @@ class itemgraded_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_itemgraded\itemgraded::get_description
      */
-    public function test_getdescription() {
+    public function test_getdescription(): void {
         $this->assertSame(
             self::$subplugin->get_description(),
             [
@@ -368,7 +368,7 @@ class itemgraded_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_itemgraded\itemgraded::process_markups
      */
-    public function test_processmarkups() {
+    public function test_processmarkups(): void {
 
         $params['cmid'] = 5;
         $params['op'] = ">";
@@ -388,7 +388,7 @@ class itemgraded_test extends \advanced_testcase {
      * @covers       \notificationscondition_itemgraded\itemgraded::get_ui
      * @dataProvider datagetui
      */
-    public function test_getui($template = false) {
+    public function test_getui($template = false): void {
         if ($template) {
             self::$rule->set_template(0);
             self::$subplugin = new itemgraded(self::$rule->to_record());
@@ -460,7 +460,7 @@ class itemgraded_test extends \advanced_testcase {
      *
      * @covers \notificationscondition_itemgraded\itemgraded::convert_parameters
      */
-    public function test_convertparameters() {
+    public function test_convertparameters(): void {
         $id = self::$subplugin->get_id();
         $params = [
                 $id . "_itemgraded_cmid" => "5",
@@ -478,7 +478,7 @@ class itemgraded_test extends \advanced_testcase {
      *
      * @covers       \notificationscondition_itemgraded\itemgraded::validation
      */
-    public function test_validation() {
+    public function test_validation(): void {
         $quizgenerator = self::getDataGenerator()->get_plugin_generator('mod_quiz');
         $cmtestaa = $quizgenerator->create_instance([
                 'name' => 'Quiz unittest',

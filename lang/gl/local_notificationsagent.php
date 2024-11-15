@@ -35,10 +35,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Axente de notificacións';
-
 $string['admin_breadcrumb'] = 'Axente de notificacións Admin';
 $string['course_breadcrumb'] = 'Axente de notificacións';
+$string['pluginname'] = 'Axente de notificacións';
+
 
 // Configuración.
 $string['settings'] = 'Configuración';

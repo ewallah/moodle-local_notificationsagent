@@ -45,7 +45,7 @@ use local_notificationsagent\external\update_rule_share;
  * @runInSeparateProcess
  * @runTestsInSeparateProcesses
  */
-class update_rule_share_test extends \advanced_testcase {
+final class update_rule_share_test extends \advanced_testcase {
     /**
      * @var rule
      */
@@ -111,7 +111,7 @@ class update_rule_share_test extends \advanced_testcase {
      *
      * @return void
      */
-    final public function setUp(): void {
+    public function setUp(): void {
         parent::setUp();
         $this->resetAfterTest();
         $rule = new rule();
@@ -140,7 +140,7 @@ class update_rule_share_test extends \advanced_testcase {
      *
      * @return void
      */
-    public function test_execute($user, $useinstance, $expected, $status) {
+    public function test_execute($user, $useinstance, $expected, $status): void {
         global $DB;
         $coursecontext = \context_course::instance(self::$course->id);
         self::$user = self::getDataGenerator()->create_and_enrol($coursecontext, 'manager');

@@ -43,7 +43,7 @@ use notificationscondition_ac\ac;
  *
  * @group notificationsagent
  */
-class ac_crontask_test extends \advanced_testcase {
+final class ac_crontask_test extends \advanced_testcase {
     /**
      * @var rule
      */
@@ -81,7 +81,7 @@ class ac_crontask_test extends \advanced_testcase {
      */
     public const USER_LASTACCESS = 1704099600;
 
-    final public function setUp(): void {
+    public function setUp(): void {
         parent::setUp();
         $this->resetAfterTest();
         $rule = new rule();
@@ -103,7 +103,7 @@ class ac_crontask_test extends \advanced_testcase {
      * @covers       \local_notificationsagent\helper\helper::custom_mtrace
      *
      */
-    public function test_execute() {
+    public function test_execute(): void {
         global $DB;
 
         $pluginname = ac::NAME;
@@ -157,7 +157,7 @@ class ac_crontask_test extends \advanced_testcase {
      * @covers \notificationscondition_ac\task\ac_crontask::get_name
      * @return void
      */
-    public function test_get_name() {
+    public function test_get_name(): void {
         $task = \core\task\manager::get_scheduled_task(ac_crontask::class);
 
         $this->assertIsString($task->get_name());

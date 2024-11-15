@@ -32,10 +32,10 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Condition relative date to first access to a course';
 $string['conditiontext'] = '[TTTT] has passed since the user first session in the course.';
-$string['subtype'] = 'sessionstart';
-$string['modname'] = 'sessionstart';
 $string['editrule_condition_element_time'] = 'Time {$a->typeelement}:';
-
+$string['modname'] = 'sessionstart';
+$string['pluginname'] = 'Condition relative date to first access to a course';
 $string['privacy:metadata'] = 'The sessionstart plugin does not store any personal data.';
+$string['subtype'] = 'sessionstart';
+

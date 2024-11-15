@@ -31,6 +31,7 @@ jobs:
           php-version: ${{ matrix.php }}
           ini-values: max_input_vars=5000
           tools: pecl
+          extensions: uopz
           coverage: pcov
 
       - name: composer
@@ -46,9 +47,6 @@ jobs:
         env:
           DB: ${{ matrix.database }}
           MOODLE_BRANCH: ${{ matrix.moodle-branch }}
-
-      - name: Install uopz
-        run: pecl install uopz
 
       - name: phplint
         if: ${{ !cancelled() }}

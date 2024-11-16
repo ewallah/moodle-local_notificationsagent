@@ -27,14 +27,14 @@ M.local_notificationsagent = Y.Object(M.core_availability);
 
 /**
  * CUSTOM ISYC
- * 
+ *
  * Called to initialise the system when the page loads. This method will
  * also call the init method for each plugin.
  *
  * @method init
  */
 M.core_availability.form.init = function (pluginParams) {
-    
+
     // Init all plugins.
     for (var plugin in pluginParams) {
         var params = pluginParams[plugin];
@@ -68,25 +68,24 @@ M.core_availability.form.init = function (pluginParams) {
         }
     }
 
-    var dataConditions = { c: [], op: '&', showc: true }
-    var dataExceptions = { c: [], op: '!|', showc: true }
+    var dataConditions = { c: [], op: '&', showc: true };
+    var dataExceptions = { c: [], op: '!|', showc: true };
     if(data !== null){
         // Construct children.
-        for (let i = 0; i < data.c.length; i++) {
-            let child = data.c[i];
+        for (var i = 0; i < data.c.length; i++) {
+            var child = data.c[i];
             if (data && data.showc !== undefined) {
                 child.showc = data.showc[i];
             }
             // Conditions
             if(i==0){
-                dataConditions = child
+                dataConditions = child;
             }else if(i==1){ // Exceptions
-                dataExceptions = child
+                dataExceptions = child;
             }
         }
     }
 
-    
     // Generate root json
     this.rootList = new M.core_availability.List(null, true);
 
@@ -107,15 +106,14 @@ M.core_availability.form.init = function (pluginParams) {
     if(dataConditions.c.length > 0 || dataExceptions.c.length > 0){
         this.rootList.setVisibilityDiv(false);
     }
-    
     this.mainDiv.appendChild(this.rootList.node);
-    
+
     // Update JSON value after loading (to reflect any changes that need
     // to be made to make it valid).
     this.update();
     this.rootList.renumber();
     this.rootList.updateHtml();
-    
+
     // // Add to select
     newItemCondition.selectAddCustom('newcondition');
     newItemException.selectAddCustom('newexception');
@@ -145,14 +143,14 @@ M.core_availability.form.init = function (pluginParams) {
         this.updateRestrictByGroup();
     }
 
-    const tab_active = document.querySelector('#nav-tab a.active');
-    const tab_active_id = tab_active.id;
+    var tab_active = document.querySelector('#nav-tab a.active');
+    var tab_active_id = tab_active.id;
     showHideTab(tab_active_id);
-}
+};
 
 /**
  * ISYC
- * 
+ *
  * Maintains a list of children and settings for how they are combined.
  *
  * @method constructorChildrenCustom
@@ -253,7 +251,7 @@ M.local_notificationsagent.List.prototype.constructorChildrenCustom = function(j
 
 /**
  * ISYC
- * 
+ *
  * Adds a child to the end of the list (in HTML and stored data).
  *
  * @method addChildCustom
@@ -268,7 +266,7 @@ M.local_notificationsagent.List.prototype.addChildCustom = function(newItem) {
 
 /**
  * ISYC
- * 
+ *
  * Remove the button in the main list.
  *
  * @method removeButton
@@ -282,7 +280,7 @@ M.core_availability.List.prototype.removeButton = function(newItem) {
 
 /**
  * ISYC
- * 
+ *
  * Set setVisibilityDiv to visible or hidden
  *
  * @method setVisibilityDiv
@@ -296,17 +294,17 @@ M.core_availability.List.prototype.setVisibilityDiv = function(visible) {
 
 /**
  * ISYC
- * 
+ *
  * Add AC options to select.
  *
  * @method selectAddCustom
  * @param {String} conditionType div
  */
 M.local_notificationsagent.List.prototype.selectAddCustom = function(conditionType) {
-    // Add elements to select // 
-    const select = Y.one('#id_'+conditionType+'_select');
-    const fgroupDiv = Y.one('#fgroup_id_'+conditionType+'_group');
-    const div = Y.Node.create('<div class="hide-div"></div>');
+    // Add elements to select //
+    var select = Y.one('#id_'+conditionType+'_select');
+    var fgroupDiv = Y.one('#fgroup_id_'+conditionType+'_group');
+    var div = Y.Node.create('<div class="hide-div"></div>');
 
     var id, button;
     for (var type in M.core_availability.form.plugins) {
@@ -317,7 +315,10 @@ M.local_notificationsagent.List.prototype.selectAddCustom = function(conditionTy
 
         id = conditionType + '_availability_addrestriction_' + type;
 
-        const option = Y.Node.create('<option data-type="ac" value="'+id+'" class="availability-field fcontainer">'+M.util.get_string('title', 'availability_' + type)+'</option>');
+        var option = Y.Node.create('<option data-type="ac" value="' + id +
+             '" class="availability-field fcontainer">' +
+             M.util.get_string('title', 'availability_' + type) +
+             '</option>');
         select.appendChild(option);
 
         // Add entry for plugin.
@@ -331,7 +332,7 @@ M.local_notificationsagent.List.prototype.selectAddCustom = function(conditionTy
 
 /**
  * ISYC
- * 
+ *
  * Gets an add handler function used by the dialogue to add a particular item.
  *
  * @method getAddHandlerCustom
@@ -350,20 +351,20 @@ M.local_notificationsagent.List.prototype.getAddHandlerCustom = function(type) {
         }
         // Add to list.
         this.addChildCustom(newItem);
-        
+
         // Update the form and list HTML.
         M.core_availability.form.update();
         M.core_availability.form.rootList.renumber();
         this.updateHtml();
         newItem.focusAfterAdd();
-        
+
         M.core_availability.form.rootList.setVisibilityDiv(false);//show
     };
 };
 
 /**
  * CUSTOM ISYC
- * 
+ *
  * Deletes a descendant item (Item or List). Called when the user clicks a delete icon.
  * Remove this line => this.inner.one('> .availability-button').one('button').focus();
  *
@@ -416,18 +417,18 @@ document.querySelectorAll('a[data-toggle="tab"]').forEach(function (link) {
 //////////////// UTILS //////////////////////////
 function showHideTab(id){
     document.querySelector('input[name="tab-target"]').value = id;
-    const ac_conditions = document.querySelector('#ac-conditions .availability-inner');
-    const ac_exceptions = document.querySelector('#ac-exceptions .availability-inner');
+    var ac_conditions = document.querySelector('#ac-conditions .availability-inner');
+    var ac_exceptions = document.querySelector('#ac-exceptions .availability-inner');
 
     if(id=="nav-conditions-tab"){
-        const ac_conditions_availability_children = document.querySelector('#ac-conditions .availability-inner > .availability-children');
-        const check = !ac_conditions_availability_children.children.length > 0;
+        var ac_conditions_availability_children = document.querySelector('#ac-conditions .availability-inner > .availability-children');  // eslint-disable-line
+        var check = !ac_conditions_availability_children.children.length > 0;
         document.getElementById("fitem_id_availabilityconditionsjson").setAttribute('aria-hidden', check);
         ac_conditions.classList.remove("hide-div");
         ac_exceptions.classList.add("hide-div");
     }else if(id=="nav-exceptions-tab"){
-        const ac_exceptions_availability_children = document.querySelector('#ac-exceptions .availability-inner > .availability-children');
-        const check = !ac_exceptions_availability_children.children.length > 0;
+        var ac_exceptions_availability_children = document.querySelector('#ac-exceptions .availability-inner > .availability-children');  // eslint-disable-line
+        var check = !ac_exceptions_availability_children.children.length > 0;
         document.getElementById("fitem_id_availabilityconditionsjson").setAttribute('aria-hidden', check);
         ac_exceptions.classList.remove("hide-div");
         ac_conditions.classList.add("hide-div");

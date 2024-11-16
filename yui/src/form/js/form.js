@@ -70,8 +70,8 @@ M.core_availability.form.init = function (pluginParams) {
     var dataExceptions = { c: [], op: '!|', showc: true }
     if(data !== null){
         // Construct children.
-        for (let i = 0; i < data.c.length; i++) {
-            let child = data.c[i];
+        for (var i = 0; i < data.c.length; i++) {
+            var child = data.c[i];
             if (data && data.showc !== undefined) {
                 child.showc = data.showc[i];
             }
@@ -143,8 +143,8 @@ M.core_availability.form.init = function (pluginParams) {
         this.updateRestrictByGroup();
     }
 
-    const tab_active = document.querySelector('#nav-tab a.active');
-    const tab_active_id = tab_active.id;
+    var tab_active = document.querySelector('#nav-tab a.active');
+    var tab_active_id = tab_active.id;
     showHideTab(tab_active_id);
 }
 
